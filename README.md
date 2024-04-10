@@ -105,6 +105,6 @@ The `CloudEvent` class includes the following attributes according to the CloudE
 * `datacontenttype`: (Optional[str]) The data content type (default is None).
 * `dataschema`: (Optional[str]) The data schema (default is None).
 * `subject`: (Optional[str]) The subject of the event (default is None).
-* `time`: (Optional[datetime]) The timestamp of the event (default is None).
+* `time`: (Optional[str]) The timestamp of the event (default is None).
 * `data`: (Any) The data associated with the event (default is None).
 * `extensions`: (Hashable) Additional extensions for the event.
