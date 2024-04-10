@@ -50,6 +50,46 @@ class CloudEvent:
 
         self._validation_errors: list[str] = []
 
+    def __getattr__(self, name: str):
+        attr = self._extensions.get(name)
+        return attr
+
+    @property
+    def id(self) -> str:
+        return self._id
+
+    @property
+    def specversion(self) -> str:
+        return self._specversion
+
+    @property
+    def source(self) -> str:
+        return self._source
+
+    @property
+    def type(self) -> str:
+        return self._type
+
+    @property
+    def datacontenttype(self) -> Optional[str]:
+        return self._datacontenttype
+
+    @property
+    def dataschema(self) -> Optional[str]:
+        return self._dataschema
+
+    @property
+    def subject(self) -> Optional[str]:
+        return self._subject
+
+    @property
+    def time(self) -> Optional[str]:
+        return self._time
+
+    @property
+    def data(self) -> Any:
+        return self._data
+
     def _is_validated(self) -> bool:
         self._validation_errors.clear()
 
