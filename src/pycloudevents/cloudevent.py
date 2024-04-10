@@ -103,8 +103,8 @@ class CloudEvent:
         Returns:
             An instance of the class.
         """
-        v: Dict[str, Any] = deepcopy(m)
-        return cls.from_dict(v)
+        v = deepcopy(m)
+        return cls.from_dict(dict(v))
 
     @classmethod
     def from_dict(cls, v: Dict[str, Any]):
