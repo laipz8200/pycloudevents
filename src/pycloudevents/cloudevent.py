@@ -4,6 +4,10 @@ import json
 from typing import Any, Dict, Hashable, Mapping, Optional
 
 
+class ValidationError(Exception):
+    pass
+
+
 class CloudEvent:
     def __init__(
         self,
@@ -15,7 +19,7 @@ class CloudEvent:
         datacontenttype: Optional[str] = None,
         dataschema: Optional[str] = None,
         subject: Optional[str] = None,
-        time: Optional[datetime] = None,
+        time: Optional[str] = None,
         data: Any = None,
         **extensions: Hashable,
     ) -> None:
@@ -30,7 +34,7 @@ class CloudEvent:
             datacontenttype (Optional[str]): The content type of the data (default is None).
             dataschema (Optional[str]): The schema of the data (default is None).
             subject (Optional[str]): The subject of the object (default is None).
-            time (Optional[datetime]): The timestamp of the object (default is None).
+            time (Optional[str]): The timestamp of the object (default is None).
             data (Any): The data associated with the object (default is None).
             **extensions (Hashable): Additional extensions for the object.
         Returns:
@@ -46,6 +50,35 @@ class CloudEvent:
         self._time = time
         self._data = data
         self._extensions = extensions
+
+        self._validation_errors: list[str] = []
+
+    def _is_validated(self) -> bool:
+        self._validation_errors.clear()
+
+        # Spec version
+        if not self._specversion == "1.0":
+            self._validation_errors.append("specversion must be 1.0")
+
+        # Required fields
+        if self._id is None:
+            self._validation_errors.append("id must not be None")
+        if self._source is None:
+            self._validation_errors.append("source must not be None")
+        if self._type is None:
+            self._validation_errors.append("type must not be None")
+
+        # Check format
+        if isinstance(self._time, str):
+            # TODO: Switch to check for ISO 3339 format
+            try:
+                datetime.fromisoformat(self._time)
+            except ValueError:
+                self._validation_errors.append("time must be in ISO8601 format")
+
+        if self._validation_errors:
+            return False
+        return True
 
     def to_json(self, *args, **kwargs):
         """
@@ -73,7 +106,7 @@ class CloudEvent:
         if self._subject is not None:
             v["subject"] = self._subject
         if self._time is not None:
-            v["time"] = self._time.isoformat()
+            v["time"] = self._time
         return json.dumps(v, *args, **kwargs)
 
     to_structured = to_json
@@ -121,21 +154,16 @@ class CloudEvent:
         """
         id_ = v.pop("id")
         source = v.pop("source")
-        specversion = v.pop("specversion")
         type_ = v.pop("type")
-        time = v.pop("time", None)
-        if time is not None:
-            time = datetime.fromisoformat(time)
-        data = v.pop("data", None)
-        return cls(
+        obj = cls(
             id=id_,
             source=source,
-            specversion=specversion,
             type=type_,
-            time=time,
-            data=data,
             **v,
         )
+        if not obj._is_validated():
+            raise ValidationError(obj._validation_errors)
+        return obj
 
 
 if __name__ == "__main__":
