@@ -76,6 +76,8 @@ class CloudEvent:
             v["time"] = self._time.isoformat()
         return json.dumps(v, *args, **kwargs)
 
+    to_structured = to_json
+
     @classmethod
     def from_json(cls, json_str: str, *args, **kwargs):
         """

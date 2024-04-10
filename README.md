@@ -71,14 +71,14 @@ event = CloudEvent.from_json(json_string)
 
 ### Serializing a CloudEvent object to JSON
 
-The `to_json` method converts a `CloudEvent` object to a JSON string:
+The `to_structured` method converts a `CloudEvent` object to a JSON string:
 
 ```python
 from pycloudevents import CloudEvent
 
 event = CloudEvent(...)  # Create an event object
 
-json_data = event.to_json()
+json_data = event.to_structured()
 print(json_data)
 ```
 
