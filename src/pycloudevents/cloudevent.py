@@ -2,10 +2,7 @@ from copy import deepcopy
 from datetime import datetime
 import json
 from typing import Any, Dict, Hashable, Mapping, Optional
-
-
-class ValidationError(Exception):
-    pass
+from pycloudevents.exceptions import ValidationError
 
 
 class CloudEvent:
