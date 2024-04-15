@@ -117,7 +117,7 @@ class CloudEvent:
             return False
         return True
 
-    def to_json(self, *args, **kwargs):
+    def to_structured(self, *args, **kwargs):
         """
         A function that converts the object attributes into a JSON format.
 
@@ -146,7 +146,8 @@ class CloudEvent:
             v["time"] = self._time
         return json.dumps(v, *args, **kwargs)
 
-    to_structured = to_json
+    def to_json(self, *args, **kwargs):
+        return self.to_structured(*args, **kwargs)
 
     @classmethod
     def from_json(cls, json_str: str, *args, **kwargs):
