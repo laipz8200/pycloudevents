@@ -9,6 +9,13 @@ dependencies = []
 requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "Apache2.0"}
+keywords = ["cloudevents"]
+
+[project.urls]
+Homepage = "https://github.com/laipz8200/pycloudevents"
+Repository = "https://github.com/laipz8200/pycloudevents"
+Documentation = "https://github.com/laipz8200/pycloudevents/blob/main/README.md"
+Changelog = "https://github.com/laipz8200/pycloudevents/blob/main/CHANGELOG.md"
 
 [build-system]
 requires = ["pdm-backend"]
