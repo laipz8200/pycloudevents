@@ -1,7 +1,7 @@
 from copy import deepcopy
 from datetime import datetime
 import json
-from typing import Any, Dict, Hashable, Mapping, Optional
+from typing import Any, Dict, Hashable, Literal, Mapping, Optional
 from pycloudevents.exceptions import ValidationError
 
 
@@ -11,9 +11,9 @@ class CloudEvent:
         *,
         id: str,
         source: str,
-        specversion: str = "1.0",
+        specversion: Literal["1.0"] = "1.0",
         type: str,
-        datacontenttype: Optional[str] = None,
+        datacontenttype: Optional[str] = "application/json",
         dataschema: Optional[str] = None,
         subject: Optional[str] = None,
         time: Optional[str] = None,
