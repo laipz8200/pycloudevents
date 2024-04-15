@@ -4,7 +4,9 @@ This Python library defines a CloudEvent class that represents a CloudEvent obje
 
 ## Installation
 
-TODO
+```shell
+pip install pycloudevents
+```
 
 ## Usage
 
