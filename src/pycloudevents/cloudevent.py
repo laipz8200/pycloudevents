@@ -54,6 +54,16 @@ class CloudEvent:
         attr = self._extensions.get(name)
         return attr
 
+    def _to_string(self):
+        subject = f'"{self._subject}"' if self._subject else ""
+        return f'<pycloudevents.CloudEvent ({self._specversion}) "{self._type}" "{self._id}" "{self._source}" {subject}>'
+
+    def __repr__(self) -> str:
+        return self._to_string()
+
+    def __str__(self) -> str:
+        return self._to_string()
+
     @property
     def id(self) -> str:
         return self._id
