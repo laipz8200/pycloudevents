@@ -50,7 +50,7 @@ class CloudEvent:
 
         self._validation_errors: list[str] = []
 
-    def __getattr__(self, name: str):
+    def __getattr__(self, name: str) -> Any:
         attr = self._extensions.get(name)
         return attr
 
