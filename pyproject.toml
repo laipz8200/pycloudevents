@@ -1,6 +1,6 @@
 [project]
 name = "pycloudevents"
-version = "0.1.2"
+version = "0.1.3"
 description = "A third party cloudevents 1.0 SDK for Python."
 authors = [
     {name = "-LAN-", email = "laipz8200@outlook.com"},
