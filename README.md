@@ -2,6 +2,18 @@
 
 This Python library defines a CloudEvent class that represents a CloudEvent object according to the [CloudEvents specification](https://www.cncf.io/projects/cloudevents/).
 
+## TOC
+
+- [PyCloudEvents](#pycloudevents)
+  - [TOC](#toc)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Creating a CloudEvent object](#creating-a-cloudevent-object)
+    - [Serializing a CloudEvent object to JSON](#serializing-a-cloudevent-object-to-json)
+    - [Deserializing a JSON string to a CloudEvent object](#deserializing-a-json-string-to-a-cloudevent-object)
+  - [CloudEvent Attributes](#cloudevent-attributes)
+  - [Contributing](#contributing)
+
 ## Installation
 
 ```shell
@@ -100,13 +112,17 @@ event = CloudEvent.from_json(json_string)
 
 The `CloudEvent` class includes the following attributes according to the CloudEvents specification:
 
-* `id`: (str) The identifier of the event.
-* `source`: (str) The source of the event.
-* `specversion`: (str) The CloudEvents specification version (default is "1.0").
-* `type`: (str) The type of the event.
-* `datacontenttype`: (Optional[str]) The data content type (default is None).
-* `dataschema`: (Optional[str]) The data schema (default is None).
-* `subject`: (Optional[str]) The subject of the event (default is None).
-* `time`: (Optional[str]) The timestamp of the event (default is None).
-* `data`: (Any) The data associated with the event (default is None).
-* `extensions`: (Hashable) Additional extensions for the event.
+- `id`: (str) The identifier of the event.
+- `source`: (str) The source of the event.
+- `specversion`: (str) The CloudEvents specification version (default is "1.0").
+- `type`: (str) The type of the event.
+- `datacontenttype`: (Optional[str]) The data content type (default is None).
+- `dataschema`: (Optional[str]) The data schema (default is None).
+- `subject`: (Optional[str]) The subject of the event (default is None).
+- `time`: (Optional[str]) The timestamp of the event (default is None).
+- `data`: (Any) The data associated with the event (default is None).
+- `extensions`: (Hashable) Additional extensions for the event.
+
+## Contributing
+
+See more in our [Contributing Guidelines](./CONTRIBUTING.md)
